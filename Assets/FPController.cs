@@ -5,7 +5,14 @@ using UnityEngine;
 
 public class FPController : MonoBehaviour
 {
+    [SerializeField] private Camera cam;
+    
     private float speed = 0.1f;
+    private float xSensitivity = 5f;
+    private float ySensitivity = 5f;
+
+    private Quaternion characterRot;
+    private Quaternion camRot;
 
     private Rigidbody rb;
     private CapsuleCollider capsule;
@@ -14,6 +21,9 @@ public class FPController : MonoBehaviour
     {
         rb =GetComponent<Rigidbody>();
         capsule = GetComponent<CapsuleCollider>();
+
+        camRot = cam.transform.localRotation;
+        characterRot = transform.localRotation;
     }
 
     // Update is called once per frame
@@ -24,6 +34,15 @@ public class FPController : MonoBehaviour
 
     private void FixedUpdate()
     {
+        float yRot = Input.GetAxis("Mouse X") * ySensitivity;
+        float xRot = Input.GetAxis("Mouse Y") * xSensitivity;
+        
+        camRot *= Quaternion.Euler(-xRot,0,0);
+        characterRot *= Quaternion.Euler(0,yRot,0);
+
+        transform.localRotation = characterRot;
+        cam.transform.localRotation = camRot;
+        
         if (Input.GetKeyDown(KeyCode.Space) && IsGrounded())
         {
             rb.AddForce(0,300,0);
