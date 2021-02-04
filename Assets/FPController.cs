@@ -5,7 +5,8 @@ using UnityEngine;
 
 public class FPController : MonoBehaviour
 {
-    [SerializeField] private Camera cam;
+    public Camera cam;
+    public Animator anim;
     
     private float speed = 0.1f;
     private float xSensitivity = 2f;
@@ -34,10 +35,13 @@ public class FPController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && IsGrounded())
-        {
-            rb.AddForce(0,300,0);
-        }
+        if (Input.GetKey(KeyCode.F))
+            anim.SetBool("arm", !anim.GetBool("arm"));
+        if (Input.GetMouseButtonDown(0))
+            anim.SetBool("fire",true);
+        else if(Input.GetMouseButtonUp(0))
+            anim.SetBool("fire",false);
+
     }
 
     private void FixedUpdate()
@@ -53,6 +57,11 @@ public class FPController : MonoBehaviour
         cam.transform.localRotation = cameraRot;
         transform.localRotation = characterRot;
 
+        if (Input.GetKeyDown(KeyCode.Space) && IsGrounded())
+        {
+            rb.AddForce(0,300,0);
+        }
+        
         float x = Input.GetAxis("Horizontal")*speed;
         float z = Input.GetAxis("Vertical")*speed;
 
