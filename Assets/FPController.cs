@@ -12,6 +12,8 @@ public class FPController : MonoBehaviour
     public AudioSource[] footsteps;
     public AudioSource jump;
     public AudioSource land;
+    public AudioSource ammoPickup;
+    public AudioSource medKitPickup;
     
     private float speed = 0.1f;
     private float xSensitivity = 2f;
@@ -126,6 +128,17 @@ public class FPController : MonoBehaviour
 
     private void OnCollisionEnter(Collision other)
     {
+        if (other.gameObject.tag=="Ammo")
+        {
+            ammoPickup.Play();
+            Destroy(other.gameObject);
+        }
+
+        if (other.gameObject.tag=="MedKit")
+        {
+            medKitPickup.Play();
+            Destroy(other.gameObject);
+        }
         if (IsGrounded())
         {
             if(anim.GetBool("walking"))
