@@ -35,12 +35,12 @@ public class FPController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKey(KeyCode.F))
+        if (Input.GetKeyDown(KeyCode.F))
             anim.SetBool("arm", !anim.GetBool("arm"));
-        if (Input.GetMouseButtonDown(0))
+            if (Input.GetMouseButtonDown(0))
             anim.SetTrigger("fire");
-       if(Input.GetKey(KeyCode.R))
-           anim.SetTrigger("reload");
+            if (Input.GetKeyDown(KeyCode.R))
+            anim.SetTrigger("reload");
     }
 
     private void FixedUpdate()
