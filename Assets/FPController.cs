@@ -13,6 +13,8 @@ public class FPController : MonoBehaviour
     private float ySensitivity = 2f;
     private float minX = -90f;
     private float maxX = 90f;
+    private float x;
+    private float z;
 
     private Quaternion characterRot;
     private Quaternion cameraRot;
@@ -37,10 +39,17 @@ public class FPController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.F))
             anim.SetBool("arm", !anim.GetBool("arm"));
-            if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0))
             anim.SetTrigger("fire");
-            if (Input.GetKeyDown(KeyCode.R))
+        if (Input.GetKeyDown(KeyCode.R))
             anim.SetTrigger("reload");
+        if (Mathf.Abs(x) > 0 || Mathf.Abs(z) > 0)
+        {
+            if(!anim.GetBool("walking"))
+                anim.SetBool("walking",true);
+        }
+        else if(anim.GetBool("walking"))
+            anim.SetBool("walking",false);
     }
 
     private void FixedUpdate()
@@ -61,8 +70,8 @@ public class FPController : MonoBehaviour
             rb.AddForce(0,300,0);
         }
         
-        float x = Input.GetAxis("Horizontal")*speed;
-        float z = Input.GetAxis("Vertical")*speed;
+        x = Input.GetAxis("Horizontal")*speed;
+        z = Input.GetAxis("Vertical")*speed;
 
         transform.position +=cam.transform.forward * z + cam.transform.right * x;//new Vector3(x, 0, z);
         UpdateCursorLock();
