@@ -19,6 +19,9 @@ public class FPController : MonoBehaviour
     private Rigidbody rb;
     private CapsuleCollider capsule;
 
+    private bool lockCursor = true;
+    private bool cursorIsLocked = true;
+
     void Start()
     {
         rb =GetComponent<Rigidbody>();
@@ -35,7 +38,6 @@ public class FPController : MonoBehaviour
         {
             rb.AddForce(0,300,0);
         }
-        
     }
 
     private void FixedUpdate()
@@ -55,6 +57,7 @@ public class FPController : MonoBehaviour
         float z = Input.GetAxis("Vertical")*speed;
 
         transform.position +=cam.transform.forward * z + cam.transform.right * x;//new Vector3(x, 0, z);
+        UpdateCursorLock();
     }
 
     Quaternion ClampRotationAroundXAxis(Quaternion q)
@@ -79,5 +82,46 @@ public class FPController : MonoBehaviour
             return true;
         }
         return false;
+    }
+
+    public void SetCursorLocked(bool value)
+    {
+        lockCursor = value;
+        if (!lockCursor)
+        {
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+        }
+    }
+
+    public void UpdateCursorLock()
+    {
+        if (lockCursor)
+        {
+            InternalLockUpdate();
+        }
+    }
+
+    public void InternalLockUpdate()
+    {
+        if (Input.GetKey(KeyCode.Escape))
+        {
+            cursorIsLocked = false;
+        }
+        else if (Input.GetMouseButtonUp(0))
+        {
+            cursorIsLocked = true;
+        }
+
+        if (cursorIsLocked)
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+        }
+        else if (!cursorIsLocked)
+        {
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+        }
     }
 }
