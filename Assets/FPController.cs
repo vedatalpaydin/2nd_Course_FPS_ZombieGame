@@ -2,11 +2,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class FPController : MonoBehaviour
 {
     public Camera cam;
     public Animator anim;
+
+    public AudioSource[] footsteps; 
     
     private float speed = 0.1f;
     private float xSensitivity = 2f;
@@ -45,13 +48,29 @@ public class FPController : MonoBehaviour
             anim.SetTrigger("reload");
         if (Mathf.Abs(x) > 0 || Mathf.Abs(z) > 0)
         {
-            if(!anim.GetBool("walking"))
-                anim.SetBool("walking",true);
+            if (!anim.GetBool("walking"))
+            {
+                anim.SetBool("walking", true); 
+                InvokeRepeating(nameof(PlayFootstepAudio),0,0.4f);
+            }
         }
-        else if(anim.GetBool("walking"))
+        else if (anim.GetBool("walking"))
+        {
             anim.SetBool("walking",false);
+            CancelInvoke(nameof(PlayFootstepAudio));
+        }
     }
 
+    void PlayFootstepAudio()
+    {
+        AudioSource audioSource = new AudioSource();
+        var n = Random.Range(0, footsteps.Length);
+        audioSource = footsteps[n];
+        audioSource.Play();
+        footsteps[n] = footsteps[0];
+        footsteps[0] = audioSource;
+    }
+    
     private void FixedUpdate()
     {
         float yRot = Input.GetAxis("Mouse X") * xSensitivity;
