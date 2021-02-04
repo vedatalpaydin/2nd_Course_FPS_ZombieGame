@@ -9,7 +9,9 @@ public class FPController : MonoBehaviour
     public Camera cam;
     public Animator anim;
 
-    public AudioSource[] footsteps; 
+    public AudioSource[] footsteps;
+    public AudioSource jump;
+    public AudioSource land;
     
     private float speed = 0.1f;
     private float xSensitivity = 2f;
@@ -59,6 +61,13 @@ public class FPController : MonoBehaviour
             anim.SetBool("walking",false);
             CancelInvoke(nameof(PlayFootstepAudio));
         }
+        if (Input.GetKeyDown(KeyCode.Space) && IsGrounded())
+        {
+            rb.AddForce(0,300,0);
+            jump.Play();
+            if(anim.GetBool("walking"))
+                CancelInvoke(nameof(PlayFootstepAudio));
+        }
     }
 
     void PlayFootstepAudio()
@@ -83,11 +92,6 @@ public class FPController : MonoBehaviour
         
         cam.transform.localRotation = cameraRot;
         transform.localRotation = characterRot;
-
-        if (Input.GetKeyDown(KeyCode.Space) && IsGrounded())
-        {
-            rb.AddForce(0,300,0);
-        }
         
         x = Input.GetAxis("Horizontal")*speed;
         z = Input.GetAxis("Vertical")*speed;
@@ -118,6 +122,16 @@ public class FPController : MonoBehaviour
             return true;
         }
         return false;
+    }
+
+    private void OnCollisionEnter(Collision other)
+    {
+        if (IsGrounded())
+        {
+            if(anim.GetBool("walking"))
+                InvokeRepeating(nameof(PlayFootstepAudio),0,0.4f);
+            land.Play();
+        }
     }
 
     public void SetCursorLocked(bool value)
