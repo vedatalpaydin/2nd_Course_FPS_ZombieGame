@@ -23,6 +23,11 @@ public class FPController : MonoBehaviour
     private float x;
     private float z;
 
+    private int ammo = 0;
+    private int maxAmmo = 50;
+    private int health = 0;
+    private int maxHealth = 100;
+    
     private Quaternion characterRot;
     private Quaternion cameraRot;
 
@@ -128,14 +133,16 @@ public class FPController : MonoBehaviour
 
     private void OnCollisionEnter(Collision other)
     {
-        if (other.gameObject.tag=="Ammo")
+        if (other.gameObject.tag=="Ammo" && ammo < maxAmmo)
         {
+            ammo = Mathf.Clamp(ammo + 10, 0, maxAmmo);
             ammoPickup.Play();
             Destroy(other.gameObject);
         }
 
-        if (other.gameObject.tag=="MedKit")
+        if (other.gameObject.tag=="MedKit" && health < maxHealth)
         {
+            health = Mathf.Clamp(health + 10, 0, maxHealth);
             medKitPickup.Play();
             Destroy(other.gameObject);
         }
