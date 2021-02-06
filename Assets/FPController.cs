@@ -16,6 +16,7 @@ public class FPController : MonoBehaviour
     public AudioSource medKitPickup;
     public AudioSource triggerSound;
     public AudioSource deathSound;
+    public AudioSource reloadSound;
     
     private float speed = 0.1f;
     private float xSensitivity = 2f;
@@ -27,6 +28,8 @@ public class FPController : MonoBehaviour
 
     private int ammo = 0;
     private int maxAmmo = 50;
+    private int ammoClip = 0;
+    private int ammoClipMax = 10;
     private int health = 0;
     private int maxHealth = 100;
     
@@ -57,17 +60,25 @@ public class FPController : MonoBehaviour
             anim.SetBool("arm", !anim.GetBool("arm"));
         if (Input.GetMouseButtonDown(0) && !anim.GetBool("fire"))
         {
-            if (ammo>0)
+            if (ammoClip>0)
             {
-                ammo--;
+                ammoClip--;
                 anim.SetTrigger("fire");
             }
             else if (anim.GetBool("arm"))
                 triggerSound.Play();
 
         }
-        if (Input.GetKeyDown(KeyCode.R))
+
+        if (Input.GetKeyDown(KeyCode.R) && anim.GetBool("arm"))
+        {
             anim.SetTrigger("reload");
+            reloadSound.Play();
+            int amountNeded = ammoClipMax - ammoClip;
+            int ammoAvailable = amountNeded < ammo ? amountNeded : ammo;
+            ammo -= ammoAvailable;
+            ammoClip += ammoAvailable;
+        }
         if (Mathf.Abs(x) > 0 || Mathf.Abs(z) > 0)
         {
             if (!anim.GetBool("walking"))
