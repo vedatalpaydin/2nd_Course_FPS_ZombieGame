@@ -782,7 +782,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2322193785830790057}
-  - component: {fileID: 8564540949645212615}
+  - component: {fileID: 6342949776689674710}
   m_Layer: 0
   m_Name: AmmoBox
   m_TagString: Ammo
@@ -815,7 +815,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &8564540949645212615
+--- !u!65 &6342949776689674710
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
