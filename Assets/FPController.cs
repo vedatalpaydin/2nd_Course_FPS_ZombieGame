@@ -15,6 +15,7 @@ public class FPController : MonoBehaviour
     public AudioSource ammoPickup;
     public AudioSource medKitPickup;
     public AudioSource triggerSound;
+    public AudioSource deathSound;
     
     private float speed = 0.1f;
     private float xSensitivity = 2f;
@@ -45,6 +46,8 @@ public class FPController : MonoBehaviour
 
         cameraRot = cam.transform.localRotation;
         characterRot = transform.localRotation;
+
+        health = maxHealth;
     }
 
     // Update is called once per frame
@@ -149,12 +152,17 @@ public class FPController : MonoBehaviour
             ammoPickup.Play();
             Destroy(other.gameObject);
         }
-
-        if (other.gameObject.tag=="MedKit" && health < maxHealth)
+        else if (other.gameObject.tag=="MedKit" && health < maxHealth)
         {
             health = Mathf.Clamp(health + 10, 0, maxHealth);
             medKitPickup.Play();
             Destroy(other.gameObject);
+        }
+        else if (other.gameObject.tag=="Lava")
+        {
+            health -= 25;
+                if(health<=0)
+                    deathSound.Play();
         }
         if (IsGrounded())
         {
