@@ -41,6 +41,8 @@ public class FPController : MonoBehaviour
 
     private bool lockCursor = true;
     private bool cursorIsLocked = true;
+    private bool playingWalking = false;
+    private bool previouslyGrounded = false;
 
     void Start()
     {
@@ -91,14 +93,26 @@ public class FPController : MonoBehaviour
         {
             anim.SetBool("walking",false);
             CancelInvoke(nameof(PlayFootstepAudio));
+            playingWalking = false;
         }
-        if (Input.GetKeyDown(KeyCode.Space) && IsGrounded())
+
+        bool grounded = IsGrounded();
+        if (Input.GetKeyDown(KeyCode.Space) && grounded)
         {
             rb.AddForce(0,300,0);
             jump.Play();
-            if(anim.GetBool("walking"))
+            if (anim.GetBool("walking"))
+            {
                 CancelInvoke(nameof(PlayFootstepAudio));
+                playingWalking = false;
+            }
         }
+        else if (!previouslyGrounded && grounded)
+        {
+            land.Play();
+        }
+
+        previouslyGrounded = grounded;
     }
 
     void PlayFootstepAudio()
@@ -109,6 +123,7 @@ public class FPController : MonoBehaviour
         audioSource.Play();
         footsteps[n] = footsteps[0];
         footsteps[0] = audioSource;
+        playingWalking = true;
     }
     
     private void FixedUpdate()
@@ -177,9 +192,8 @@ public class FPController : MonoBehaviour
         }
         if (IsGrounded())
         {
-            if(anim.GetBool("walking"))
+            if(anim.GetBool("walking") && !playingWalking)
                 InvokeRepeating(nameof(PlayFootstepAudio),0,0.4f);
-            land.Play();
         }
     }
 
