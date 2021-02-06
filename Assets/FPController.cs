@@ -14,6 +14,7 @@ public class FPController : MonoBehaviour
     public AudioSource land;
     public AudioSource ammoPickup;
     public AudioSource medKitPickup;
+    public AudioSource triggerSound;
     
     private float speed = 0.1f;
     private float xSensitivity = 2f;
@@ -51,8 +52,17 @@ public class FPController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.F))
             anim.SetBool("arm", !anim.GetBool("arm"));
-        if (Input.GetMouseButtonDown(0))
-            anim.SetTrigger("fire");
+        if (Input.GetMouseButtonDown(0) && !anim.GetBool("fire"))
+        {
+            if (ammo>0)
+            {
+                ammo--;
+                anim.SetTrigger("fire");
+            }
+            else if (anim.GetBool("arm"))
+                triggerSound.Play();
+
+        }
         if (Input.GetKeyDown(KeyCode.R))
             anim.SetTrigger("reload");
         if (Mathf.Abs(x) > 0 || Mathf.Abs(z) > 0)
