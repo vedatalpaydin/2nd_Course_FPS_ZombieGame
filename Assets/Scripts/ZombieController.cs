@@ -19,6 +19,11 @@ public class ZombieController : MonoBehaviour
     public GameObject target;
     private Animator anim;
     private NavMeshAgent agent;
+    private string attacking = "IsAttacking";
+    private string walking = "IsWalking";
+    private string running = "IsRunning";
+    private string dead = "IsDead";
+    
 
 
     void Start()
@@ -29,36 +34,75 @@ public class ZombieController : MonoBehaviour
 
     void TurnOffTrigger()
     {
-        anim.SetBool("IsWalking", false);
-        anim.SetBool("IsRunning", false);
-        anim.SetBool("IsAttacking", false);
-        anim.SetBool("IsDead", false);
+        anim.SetBool(walking ,false);
+        anim.SetBool(running, false);
+        anim.SetBool(attacking, false);
+        anim.SetBool(dead, false);
     }
 
-    // Update is called once per frame
+   private float DistanceToPlayer()
+    {
+        return Vector3.Distance(target.transform.position, transform.position);
+    }
+    private bool CanSeePlayer()
+    {
+        if (DistanceToPlayer() < 10)
+            return true;
+        return false;
+    }
+
+   private bool ForgetPlayer()
+    {
+        if (DistanceToPlayer() > 20)
+            return true;
+        return false;
+    }
+
     void Update()
     {
+        Debug.Log(Vector3.Distance(target.transform.position,transform.position));
         switch (state)
         {
             case STATE.IDLE:
-                state = STATE.WANDER;
+                if (CanSeePlayer())
+                    state = STATE.CHASE;
+                else
+                    state = STATE.WANDER;
                 break;
             case STATE.WANDER:
                 if (!agent.hasPath)
                 {
-                    float newX = transform.position.x + Random.Range(-5, 5);
-                    float newZ = transform.position.z + Random.Range(-5, 5);
-                    float newY = Terrain.activeTerrain.SampleHeight(new Vector3(newX, 0, newZ));
+                    var newX = transform.position.x + Random.Range(-5, 5);
+                    var newZ = transform.position.z + Random.Range(-5, 5);
+                    var newY = Terrain.activeTerrain.SampleHeight(new Vector3(newX, 0, newZ));
                     Vector3 dest = new Vector3(newX, newY, newZ);
                     agent.SetDestination(dest);
                     agent.stoppingDistance = 0;
                     TurnOffTrigger();
-                    anim.SetBool("IsWalking",true);
+                    anim.SetBool(walking,true);
                 }
+                if (CanSeePlayer()) state = STATE.CHASE;
                 break;
             case STATE.CHASE:
+                agent.SetDestination(target.transform.position);
+                agent.stoppingDistance = 2;
+                TurnOffTrigger();
+                anim.SetBool(running,true);
+
+                if (agent.remainingDistance <= agent.stoppingDistance && !agent.pathPending)
+                    state = STATE.ATTACK;
+                if (ForgetPlayer())
+                {
+                    state = STATE.WANDER;
+                    agent.ResetPath();
+                }
                 break;
             case STATE.ATTACK:
+                TurnOffTrigger();
+                anim.SetBool(attacking,true);
+                transform.LookAt(target.transform.position);
+                if (DistanceToPlayer() > agent.stoppingDistance) 
+                    state = STATE.CHASE;
                 break;
             case STATE.DEAD:
                 break;
