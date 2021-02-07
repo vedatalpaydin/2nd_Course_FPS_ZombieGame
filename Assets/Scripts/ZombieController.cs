@@ -62,6 +62,11 @@ public class ZombieController : MonoBehaviour
 
     void Update()
     {
+        if (target == null)
+        {
+            target = GameObject.FindWithTag("Player");
+            return;
+        }
         Debug.Log(Vector3.Distance(target.transform.position,transform.position));
         switch (state)
         {
