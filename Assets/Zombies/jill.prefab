@@ -4425,9 +4425,10 @@ GameObject:
   - component: {fileID: 2986969213742036221}
   - component: {fileID: 358193284}
   - component: {fileID: 358193285}
+  - component: {fileID: 972646488}
   m_Layer: 0
   m_Name: jill
-  m_TagString: Untagged
+  m_TagString: Zombie
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4505,3 +4506,17 @@ MonoBehaviour:
   ragdoll: {fileID: 8415835927011274987, guid: 9e4049080115447a0925d184a055ddbe, type: 3}
   walkingSpeed: 0.8
   runningSpeed: 1
+--- !u!136 &972646488
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9153167617879130721}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.4
+  m_Height: 1.6
+  m_Direction: 1
+  m_Center: {x: 0, y: 1, z: 0}

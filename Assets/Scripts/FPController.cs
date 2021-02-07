@@ -5,7 +5,11 @@ using UnityEngine;
 public class FPController : MonoBehaviour
 {
     public GameObject cam;
+    public Transform shotDirection;
+    
     public Animator anim;
+    
+    
     public AudioSource[] footsteps;
     public AudioSource jump;
     public AudioSource land;
@@ -32,11 +36,11 @@ public class FPController : MonoBehaviour
     float z;
 
     //Inventory
-    int ammo = 0;
+    int ammo = 50;
     int maxAmmo = 50;
     int health = 0;
     int maxHealth = 100;
-    int ammoClip = 0;
+    int ammoClip = 10;
     int ammoClipMax = 10;
 
     bool playingWalking = false;
@@ -53,6 +57,10 @@ public class FPController : MonoBehaviour
         health = maxHealth;
     }
 
+    void ProcessZombieHit()
+    {
+        
+    }
     // Update is called once per frame
     void Update()
     {
@@ -64,6 +72,7 @@ public class FPController : MonoBehaviour
             if (ammoClip > 0)
             {
                 anim.SetTrigger("fire");
+                ProcessZombieHit();
                 ammoClip--;
             }
             else if (anim.GetBool("arm"))
