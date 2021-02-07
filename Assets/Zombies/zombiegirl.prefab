@@ -2237,6 +2237,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
+  ragdoll: {fileID: 983161384053120950, guid: 85f98f499bd8c458f8c485217dbe8fe2, type: 3}
   walkingSpeed: 1
   runningSpeed: 3
 --- !u!195 &982035034

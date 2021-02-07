@@ -5,18 +5,12 @@ using UnityEngine.AI;
 
 public class ZombieController : MonoBehaviour
 {
-    enum STATE
-    {
-        IDLE,
-        WANDER,
-        ATTACK,
-        CHASE,
-        DEAD
-    }
-
+    enum STATE { IDLE, WANDER, ATTACK, CHASE, DEAD }
     private STATE state = STATE.IDLE;
     
     public GameObject target;
+    public GameObject ragdoll;
+    
     private Animator anim;
     private NavMeshAgent agent;
     private string attacking = "IsAttacking";
@@ -62,12 +56,27 @@ public class ZombieController : MonoBehaviour
 
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            if (Random.Range(0,10)<5)
+            {
+                GameObject rd = Instantiate(ragdoll, transform.position, transform.rotation);
+                rd.transform.Find("Hips").GetComponent<Rigidbody>().AddForce(Camera.main.transform.forward*10000);
+                Destroy(gameObject);
+            }
+            else
+            {
+                TurnOffTrigger();
+                state = STATE.DEAD;
+                anim.SetBool(dead,true);
+            }
+            return;
+        }
         if (target == null)
         {
             target = GameObject.FindWithTag("Player");
             return;
         }
-        Debug.Log(Vector3.Distance(target.transform.position,transform.position));
         switch (state)
         {
             case STATE.IDLE:

@@ -42,7 +42,7 @@ GameObject:
   - component: {fileID: 4472982804388616938}
   - component: {fileID: 118612221677998246}
   m_Layer: 0
-  m_Name: Zombie:Hips
+  m_Name: Hips
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
