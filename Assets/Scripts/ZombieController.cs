@@ -23,6 +23,8 @@ public class ZombieController : MonoBehaviour
     private string walking = "IsWalking";
     private string running = "IsRunning";
     private string dead = "IsDead";
+    public float walkingSpeed;
+    public float runningSpeed;
     
 
 
@@ -66,7 +68,7 @@ public class ZombieController : MonoBehaviour
             case STATE.IDLE:
                 if (CanSeePlayer())
                     state = STATE.CHASE;
-                else
+                else if(Random.Range(0,5000) < 5)
                     state = STATE.WANDER;
                 break;
             case STATE.WANDER:
@@ -79,14 +81,22 @@ public class ZombieController : MonoBehaviour
                     agent.SetDestination(dest);
                     agent.stoppingDistance = 0;
                     TurnOffTrigger();
+                    agent.speed = walkingSpeed;
                     anim.SetBool(walking,true);
                 }
                 if (CanSeePlayer()) state = STATE.CHASE;
+                else if (Random.Range(0, 5000) < 5)
+                {
+                    state = STATE.IDLE;
+                    TurnOffTrigger();
+                    agent.ResetPath();
+                }
                 break;
             case STATE.CHASE:
                 agent.SetDestination(target.transform.position);
                 agent.stoppingDistance = 2;
                 TurnOffTrigger();
+                agent.speed = runningSpeed;
                 anim.SetBool(running,true);
 
                 if (agent.remainingDistance <= agent.stoppingDistance && !agent.pathPending)
@@ -101,7 +111,7 @@ public class ZombieController : MonoBehaviour
                 TurnOffTrigger();
                 anim.SetBool(attacking,true);
                 transform.LookAt(target.transform.position);
-                if (DistanceToPlayer() > agent.stoppingDistance) 
+                if (DistanceToPlayer() > agent.stoppingDistance+1) 
                     state = STATE.CHASE;
                 break;
             case STATE.DEAD:

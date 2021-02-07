@@ -1298,6 +1298,14 @@ PrefabInstance:
       propertyPath: target
       value: 
       objectReference: {fileID: 2070499785}
+    - target: {fileID: 1763133489, guid: 6a1d6fe89cd7e4fe486e4cabf09b8d3d, type: 3}
+      propertyPath: walkingSpeed
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1763133489, guid: 6a1d6fe89cd7e4fe486e4cabf09b8d3d, type: 3}
+      propertyPath: runningSpeed
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 5176861845160572960, guid: 6a1d6fe89cd7e4fe486e4cabf09b8d3d,
         type: 3}
       propertyPath: m_Name
@@ -10612,10 +10620,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 358193284, guid: b7dd32307aa7f43bf98270b4b8b91c33, type: 3}
+      propertyPath: m_Speed
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 358193285, guid: b7dd32307aa7f43bf98270b4b8b91c33, type: 3}
       propertyPath: target
       value: 
       objectReference: {fileID: 2070499785}
+    - target: {fileID: 358193285, guid: b7dd32307aa7f43bf98270b4b8b91c33, type: 3}
+      propertyPath: walkingSpeed
+      value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 358193285, guid: b7dd32307aa7f43bf98270b4b8b91c33, type: 3}
+      propertyPath: runningSpeed
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5286606572932149362, guid: b7dd32307aa7f43bf98270b4b8b91c33,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -11419,6 +11439,21 @@ PrefabInstance:
       propertyPath: target
       value: 
       objectReference: {fileID: 2070499785}
+    - target: {fileID: 6548153697295695537, guid: d5b7cf80f1fab4ea0bd49a0e878214fe,
+        type: 3}
+      propertyPath: walkingSpeed
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6548153697295695537, guid: d5b7cf80f1fab4ea0bd49a0e878214fe,
+        type: 3}
+      propertyPath: runningSpeed
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7986974435694200116, guid: d5b7cf80f1fab4ea0bd49a0e878214fe,
+        type: 3}
+      propertyPath: m_Speed
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d5b7cf80f1fab4ea0bd49a0e878214fe, type: 3}
 --- !u!1001 &1359075059
@@ -12744,6 +12779,14 @@ PrefabInstance:
       propertyPath: target
       value: 
       objectReference: {fileID: 2070499785}
+    - target: {fileID: 982035033, guid: 7912ec467aa9147a59e49b3925ad126e, type: 3}
+      propertyPath: walkingSpeed
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 982035033, guid: 7912ec467aa9147a59e49b3925ad126e, type: 3}
+      propertyPath: runningSpeed
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 5643912976069227624, guid: 7912ec467aa9147a59e49b3925ad126e,
         type: 3}
       propertyPath: m_LocalPosition.x
