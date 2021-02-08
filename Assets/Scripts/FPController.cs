@@ -12,6 +12,7 @@ public class FPController : MonoBehaviour
     public Transform shotDirection;
     public Slider healthSlider;
     public Text ammoReserves;
+    public Text AmmoClipText;
     
     public Animator anim;
 
@@ -93,6 +94,7 @@ public class FPController : MonoBehaviour
         health = maxHealth;
         healthSlider.value = health;
         ammoReserves.text = ammo.ToString();
+        AmmoClipText.text = ammoClip.ToString();
     }
 
     void ProcessZombieHit()
@@ -123,15 +125,17 @@ public class FPController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.F))
             anim.SetBool("arm", !anim.GetBool("arm"));
 
-        if (Input.GetMouseButtonDown(0) && !anim.GetBool("fire"))
+        if (Input.GetMouseButtonDown(0) && !anim.GetBool("fire") && anim.GetBool("arm") && GameStats.canShoot)
         {
             if (ammoClip > 0)
             {
                 anim.SetTrigger("fire");
                 ProcessZombieHit();
                 ammoClip--;
+                AmmoClipText.text = ammoClip.ToString();
+                GameStats.canShoot = false;
             }
-            else if (anim.GetBool("arm"))
+            else
                 triggerSound.Play();
         }
 
@@ -143,6 +147,7 @@ public class FPController : MonoBehaviour
             int ammoAvailable = amountNeeded < ammo ? amountNeeded : ammo;
             ammo -= ammoAvailable;
             ammoClip += ammoAvailable;
+            AmmoClipText.text = ammoClip.ToString();
             ammoReserves.text = ammo.ToString();
         }
 
