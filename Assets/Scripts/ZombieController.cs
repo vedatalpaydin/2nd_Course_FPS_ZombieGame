@@ -13,12 +13,15 @@ public class ZombieController : MonoBehaviour
     
     private Animator anim;
     private NavMeshAgent agent;
+    
     private string attacking = "IsAttacking";
     private string walking = "IsWalking";
     private string running = "IsRunning";
     private string dead = "IsDead";
+    
     public float walkingSpeed;
     public float runningSpeed;
+    public float damageAmount=5;
     
 
 
@@ -60,25 +63,14 @@ public class ZombieController : MonoBehaviour
        state = STATE.DEAD;
        anim.SetBool(dead,true);
    }
+   
+   public void DamagePlayer()
+   {
+       target.GetComponent<FPController>().TakeDamage(damageAmount);
+   }
 
     void Update()
     {
-       /* if (Input.GetKeyDown(KeyCode.P))
-        {
-            if (Random.Range(0,10)<5)
-            {
-                GameObject rd = Instantiate(ragdoll, transform.position, transform.rotation);
-                rd.transform.Find("Hips").GetComponent<Rigidbody>().AddForce(Camera.main.transform.forward*10000);
-                Destroy(gameObject);
-            }
-            else
-            {
-                TurnOffTrigger();
-                state = STATE.DEAD;
-                anim.SetBool(dead,true);
-            }
-            return;
-        }*/
         if (target == null)
         {
             target = GameObject.FindWithTag("Player");
