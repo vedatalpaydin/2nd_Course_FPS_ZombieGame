@@ -8,7 +8,8 @@ public class Sink : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        if(gameObject.tag=="Ragdoll")
+            Invoke(nameof(StartSink),5);
     }
 
     public void StartSink()

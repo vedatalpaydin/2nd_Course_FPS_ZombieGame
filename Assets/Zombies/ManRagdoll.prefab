@@ -3428,6 +3428,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5042894878805768801}
   - component: {fileID: 3130553615006963483}
+  - component: {fileID: 3571105269345896823}
   m_Layer: 0
   m_Name: ManRagdoll
   m_TagString: Ragdoll
@@ -3470,6 +3471,18 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &3571105269345896823
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8331852774976014450}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e74b52992fff54a4dbc9d4a30641e504, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8499728091932569830
 GameObject:
   m_ObjectHideFlags: 0
