@@ -11,6 +11,7 @@ public class FPController : MonoBehaviour
     public GameObject stevePrefab;
     public Transform shotDirection;
     public Slider healthSlider;
+    public Text ammoReserves;
     
     public Animator anim;
 
@@ -91,6 +92,7 @@ public class FPController : MonoBehaviour
 
         health = maxHealth;
         healthSlider.value = health;
+        ammoReserves.text = ammo.ToString();
     }
 
     void ProcessZombieHit()
@@ -141,6 +143,7 @@ public class FPController : MonoBehaviour
             int ammoAvailable = amountNeeded < ammo ? amountNeeded : ammo;
             ammo -= ammoAvailable;
             ammoClip += ammoAvailable;
+            ammoReserves.text = ammo.ToString();
         }
 
         if (Mathf.Abs(x) > 0 || Mathf.Abs(z) > 0)
@@ -242,7 +245,7 @@ public class FPController : MonoBehaviour
         if (col.gameObject.tag == "Ammo" && ammo < maxAmmo)
         {
             ammo = Mathf.Clamp(ammo + 10, 0, maxAmmo);
-            Debug.Log("Ammo: " + ammo);
+            ammoReserves.text = ammo.ToString();
             Destroy(col.gameObject);
             ammoPickup.Play();
 
@@ -257,7 +260,6 @@ public class FPController : MonoBehaviour
         else if (col.gameObject.tag == "Lava")
         {
             health = Mathf.Clamp(health - 50, 0, maxHealth);
-            Debug.Log("Health Level: " + health);
             if (health <= 0)
                 deathSound.Play();
         }
