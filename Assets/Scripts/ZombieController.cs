@@ -41,7 +41,8 @@ public class ZombieController : MonoBehaviour
     }
 
    private float DistanceToPlayer()
-    {
+   {
+       if (GameStats.gameOver) return Mathf.Infinity;
         return Vector3.Distance(target.transform.position, transform.position);
     }
     private bool CanSeePlayer()
@@ -83,7 +84,7 @@ public class ZombieController : MonoBehaviour
 
     void Update()
     {
-        if (target == null)
+        if (target == null && GameStats.gameOver==false)
         {
             target = GameObject.FindWithTag("Player");
             return;
@@ -118,6 +119,7 @@ public class ZombieController : MonoBehaviour
                 }
                 break;
             case STATE.CHASE:
+                if(GameStats.gameOver){ TurnOffTrigger(); state = STATE.WANDER; return;}
                 agent.SetDestination(target.transform.position);
                 agent.stoppingDistance = 4;
                 TurnOffTrigger();
@@ -133,6 +135,7 @@ public class ZombieController : MonoBehaviour
                 }
                 break;
             case STATE.ATTACK:
+                if(GameStats.gameOver){ TurnOffTrigger(); state = STATE.WANDER; return;}
                 TurnOffTrigger();
                 anim.SetBool(attacking,true);
                 transform.LookAt(target.transform.position);

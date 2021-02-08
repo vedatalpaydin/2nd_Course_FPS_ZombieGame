@@ -57,6 +57,7 @@ public class FPController : MonoBehaviour
                 transform.position.z);
             GameObject steve = Instantiate(stevePrefab, pos, transform.rotation);
             steve.GetComponent<Animator>().SetTrigger("Death");
+            GameStats.gameOver = true;
             Destroy(gameObject);
         }
     }
