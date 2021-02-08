@@ -1785,12 +1785,12 @@ MonoBehaviour:
   target: {fileID: 0}
   ragdoll: {fileID: 8331852774976014450, guid: bad36032d5bd644be88f69e029671ce0, type: 3}
   splats:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 8023576565634600838}
+  - {fileID: 6259570385902149131}
+  - {fileID: 6232527077787330477}
+  - {fileID: 4129717958166041982}
+  - {fileID: 7692159703409140100}
+  - {fileID: 1254592048028889508}
   walkingSpeed: 1
   runningSpeed: 3
   damageAmount: 5
@@ -1805,7 +1805,7 @@ NavMeshAgent:
   m_AgentTypeID: 0
   m_Radius: 0.5
   m_Speed: 1
-  m_Acceleration: 8
+  m_Acceleration: 16.74
   avoidancePriority: 50
   m_AngularSpeed: 120
   m_StoppingDistance: 2

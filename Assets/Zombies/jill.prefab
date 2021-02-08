@@ -4512,12 +4512,12 @@ MonoBehaviour:
   target: {fileID: 0}
   ragdoll: {fileID: 8415835927011274987, guid: 9e4049080115447a0925d184a055ddbe, type: 3}
   splats:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 395942329093072346}
+  - {fileID: 1169556024564401875}
+  - {fileID: 991160466103973798}
+  - {fileID: 122261878520918204}
+  - {fileID: 6444884798304451740}
+  - {fileID: 5621994093592467195}
   walkingSpeed: 0.8
   runningSpeed: 1
   damageAmount: 5

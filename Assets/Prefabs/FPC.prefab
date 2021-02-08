@@ -292,7 +292,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cam: {fileID: 676386071054666449}
+  stevePrefab: {fileID: 67194648466962591, guid: 18780059112e1493685069e3f9a283f1,
+    type: 3}
   shotDirection: {fileID: 1310240493}
+  healthSlider: {fileID: 0}
   anim: {fileID: 676386070753853963}
   footsteps:
   - {fileID: 676386070099139941}
@@ -302,7 +305,7 @@ MonoBehaviour:
   jump: {fileID: 676386070099139946}
   land: {fileID: 676386070099139945}
   ammoPickup: {fileID: 676386070099139948}
-  healthPickup: {fileID: 0}
+  healthPickup: {fileID: 676386070099139947}
   triggerSound: {fileID: 676386070099139949}
   deathSound: {fileID: 676386070099139950}
   reloadSound: {fileID: 676386070099139951}

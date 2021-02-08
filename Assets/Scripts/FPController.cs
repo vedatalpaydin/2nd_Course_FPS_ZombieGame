@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
 public class FPController : MonoBehaviour
@@ -9,6 +10,7 @@ public class FPController : MonoBehaviour
     public GameObject cam;
     public GameObject stevePrefab;
     public Transform shotDirection;
+    public Slider healthSlider;
     
     public Animator anim;
 
@@ -51,6 +53,7 @@ public class FPController : MonoBehaviour
     public void TakeDamage(float amount)
     {
         health = (int) Mathf.Clamp(health - amount, 0, maxHealth);
+        healthSlider.value = health;
         if (health<=0)
         {
             Vector3 pos = new Vector3(
@@ -87,6 +90,7 @@ public class FPController : MonoBehaviour
         characterRot = this.transform.localRotation;
 
         health = maxHealth;
+        healthSlider.value = health;
     }
 
     void ProcessZombieHit()
@@ -246,7 +250,7 @@ public class FPController : MonoBehaviour
         else if (col.gameObject.tag == "MedKit" && health < maxHealth)
         {
             health = Mathf.Clamp(health + 25, 0, maxHealth);
-            Debug.Log("MedKit: " + health);
+            healthSlider.value = health;
             Destroy(col.gameObject);
             healthPickup.Play();
         }
