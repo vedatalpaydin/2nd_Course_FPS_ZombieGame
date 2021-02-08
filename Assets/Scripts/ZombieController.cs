@@ -54,9 +54,16 @@ public class ZombieController : MonoBehaviour
         return false;
     }
 
+   public void KillZombie()
+   {
+       TurnOffTrigger();
+       state = STATE.DEAD;
+       anim.SetBool(dead,true);
+   }
+
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.P))
+       /* if (Input.GetKeyDown(KeyCode.P))
         {
             if (Random.Range(0,10)<5)
             {
@@ -71,7 +78,7 @@ public class ZombieController : MonoBehaviour
                 anim.SetBool(dead,true);
             }
             return;
-        }
+        }*/
         if (target == null)
         {
             target = GameObject.FindWithTag("Player");
