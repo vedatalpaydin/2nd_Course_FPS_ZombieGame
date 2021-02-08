@@ -2181,6 +2181,7 @@ GameObject:
   - component: {fileID: 982035033}
   - component: {fileID: 982035034}
   - component: {fileID: 1471549346}
+  - component: {fileID: 5616801556033497396}
   m_Layer: 8
   m_Name: zombiegirl
   m_TagString: Zombie
@@ -2277,6 +2278,18 @@ CapsuleCollider:
   m_Height: 2.1
   m_Direction: 1
   m_Center: {x: 0, y: 1, z: 0}
+--- !u!114 &5616801556033497396
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8649283112028866171}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e74b52992fff54a4dbc9d4a30641e504, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8889811393416137658
 GameObject:
   m_ObjectHideFlags: 0

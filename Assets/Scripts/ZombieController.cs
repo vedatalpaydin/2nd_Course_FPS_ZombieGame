@@ -136,6 +136,8 @@ public class ZombieController : MonoBehaviour
                     state = STATE.CHASE;
                 break;
             case STATE.DEAD:
+                Destroy(agent);
+                GetComponent<Sink>().StartSink();
                 break;
         }
     }
