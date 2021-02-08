@@ -1,6 +1,8 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class FPController : MonoBehaviour
 {
@@ -61,6 +63,22 @@ public class FPController : MonoBehaviour
             Destroy(gameObject);
         }
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag=="Home")
+        {
+            Vector3 pos = new Vector3(
+                transform.position.x, 
+                Terrain.activeTerrain.SampleHeight(transform.position),
+                transform.position.z);
+            GameObject steve = Instantiate(stevePrefab, pos, transform.rotation);
+            steve.GetComponent<Animator>().SetTrigger("Dance");
+            GameStats.gameOver = true;
+            Destroy(gameObject);
+        }
+    }
+
     void Start()
     {
         rb = this.GetComponent<Rigidbody>();

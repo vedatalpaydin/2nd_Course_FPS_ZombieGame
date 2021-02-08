@@ -9,6 +9,7 @@ TagManager:
   - Lava
   - Zombie
   - Ragdoll
+  - Home
   layers:
   - Default
   - TransparentFX
