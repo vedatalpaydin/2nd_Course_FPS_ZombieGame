@@ -1728,6 +1728,7 @@ GameObject:
   - component: {fileID: 4129717958166041982}
   - component: {fileID: 7692159703409140100}
   - component: {fileID: 1254592048028889508}
+  - component: {fileID: 1554449777559153710}
   m_Layer: 8
   m_Name: zombieman
   m_TagString: Zombie
@@ -2418,6 +2419,19 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &1554449777559153710
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5176861845160572960}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 216fcfaead65f4cd5b992674021ee904, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Image: {fileID: 3102302379477504934, guid: 936cacc35ac884f8bb0806cb1f2ad408, type: 3}
 --- !u!1 &5215620285009353330
 GameObject:
   m_ObjectHideFlags: 0

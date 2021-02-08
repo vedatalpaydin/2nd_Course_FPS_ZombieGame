@@ -335,6 +335,7 @@ GameObject:
   - component: {fileID: 3537633645125046163}
   - component: {fileID: 2884939338394130061}
   - component: {fileID: 9185254381762205402}
+  - component: {fileID: 7232903975160465045}
   m_Layer: 8
   m_Name: boss
   m_TagString: Zombie
@@ -1025,6 +1026,19 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &7232903975160465045
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1099347172983380646}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 216fcfaead65f4cd5b992674021ee904, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Image: {fileID: 3102302379477504934, guid: 936cacc35ac884f8bb0806cb1f2ad408, type: 3}
 --- !u!1 &1571866649296816644
 GameObject:
   m_ObjectHideFlags: 0
