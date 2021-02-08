@@ -19,6 +19,7 @@ public class CompassController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(player == null) return;
         Vector3[] corners = new Vector3[4];
         compassLine.GetLocalCorners(corners);
         float pointerScale = Vector3.Distance(corners[1], corners[2]);
