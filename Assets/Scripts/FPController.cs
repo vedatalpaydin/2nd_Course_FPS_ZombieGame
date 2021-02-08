@@ -5,6 +5,7 @@ using UnityEngine;
 public class FPController : MonoBehaviour
 {
     public GameObject cam;
+    public GameObject stevePrefab;
     public Transform shotDirection;
     
     public Animator anim;
@@ -48,7 +49,16 @@ public class FPController : MonoBehaviour
     public void TakeDamage(float amount)
     {
         health = (int) Mathf.Clamp(health - amount, 0, maxHealth);
-        Debug.Log(health);
+        if (health<=0)
+        {
+            Vector3 pos = new Vector3(
+                transform.position.x, 
+                Terrain.activeTerrain.SampleHeight(transform.position),
+                transform.position.z);
+            GameObject steve = Instantiate(stevePrefab, pos, transform.rotation);
+            steve.GetComponent<Animator>().SetTrigger("Death");
+            Destroy(gameObject);
+        }
     }
     void Start()
     {
@@ -98,9 +108,6 @@ public class FPController : MonoBehaviour
             }
             else if (anim.GetBool("arm"))
                 triggerSound.Play();
-
-
-            Debug.Log("Ammo Left in Clip: " + ammoClip);
         }
 
         if (Input.GetKeyDown(KeyCode.R) && anim.GetBool("arm"))
@@ -111,8 +118,6 @@ public class FPController : MonoBehaviour
             int ammoAvailable = amountNeeded < ammo ? amountNeeded : ammo;
             ammo -= ammoAvailable;
             ammoClip += ammoAvailable;
-            Debug.Log("Ammo Left: " + ammo);
-            Debug.Log("Ammo in Clip: " + ammoClip);
         }
 
         if (Mathf.Abs(x) > 0 || Mathf.Abs(z) > 0)

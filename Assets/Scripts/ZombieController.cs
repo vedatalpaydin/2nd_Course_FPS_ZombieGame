@@ -76,6 +76,7 @@ public class ZombieController : MonoBehaviour
    }
    public void DamagePlayer()
    {
+       if(target==null) return;
        target.GetComponent<FPController>().TakeDamage(damageAmount);
        PlaySplatAudio();
    }
