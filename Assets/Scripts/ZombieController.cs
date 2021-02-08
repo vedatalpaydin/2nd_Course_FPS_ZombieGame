@@ -10,6 +10,7 @@ public class ZombieController : MonoBehaviour
     
     public GameObject target;
     public GameObject ragdoll;
+    public AudioSource[] splats;
     
     private Animator anim;
     private NavMeshAgent agent;
@@ -63,10 +64,20 @@ public class ZombieController : MonoBehaviour
        state = STATE.DEAD;
        anim.SetBool(dead,true);
    }
-   
+   void PlaySplatAudio()
+   {
+       AudioSource audioSource = new AudioSource();
+       int n = Random.Range(1, splats.Length);
+
+       audioSource = splats[n];
+       audioSource.Play();
+       splats[n] = splats[0];
+       splats[0] = audioSource;
+   }
    public void DamagePlayer()
    {
        target.GetComponent<FPController>().TakeDamage(damageAmount);
+       PlaySplatAudio();
    }
 
     void Update()
@@ -107,7 +118,7 @@ public class ZombieController : MonoBehaviour
                 break;
             case STATE.CHASE:
                 agent.SetDestination(target.transform.position);
-                agent.stoppingDistance = 2;
+                agent.stoppingDistance = 4;
                 TurnOffTrigger();
                 agent.speed = runningSpeed;
                 anim.SetBool(running,true);
