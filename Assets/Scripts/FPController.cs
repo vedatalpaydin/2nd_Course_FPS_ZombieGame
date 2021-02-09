@@ -9,7 +9,10 @@ public class FPController : MonoBehaviour
 {
     public GameObject cam;
     public GameObject stevePrefab;
+    public GameObject bloodPrefab;
+    
     public Transform shotDirection;
+    
     public Slider healthSlider;
     public Text ammoReserves;
     public Text AmmoClipText;
@@ -30,6 +33,7 @@ public class FPController : MonoBehaviour
     float Ysensitivity = 2;
     float MinimumX = -90;
     float MaximumX = 90;
+    
     Rigidbody rb;
     CapsuleCollider capsule;
     Quaternion cameraRot;
@@ -105,6 +109,9 @@ public class FPController : MonoBehaviour
             GameObject hitZombie = hitInfo.collider.gameObject;
             if (hitZombie.tag=="Zombie")
             {
+                GameObject blood =Instantiate(bloodPrefab, hitInfo.point, Quaternion.identity);
+                blood.transform.LookAt(transform.position);
+                Destroy(blood,0.5f);
                 if (Random.Range(0,10)<5)
                 {
                     GameObject rdPrefab = hitZombie.GetComponent<ZombieController>().ragdoll;
