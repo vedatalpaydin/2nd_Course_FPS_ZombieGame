@@ -10,9 +10,10 @@ public class FPController : MonoBehaviour
     public GameObject cam;
     public GameObject stevePrefab;
     public GameObject bloodPrefab;
+    public GameObject uiBloodPrefab;
+    public GameObject canvas;
     
     public Transform shotDirection;
-    
     public Slider healthSlider;
     public Text ammoReserves;
     public Text AmmoClipText;
@@ -33,6 +34,8 @@ public class FPController : MonoBehaviour
     float Ysensitivity = 2;
     float MinimumX = -90;
     float MaximumX = 90;
+    private float cWidth;
+    private float cHeight;
     
     Rigidbody rb;
     CapsuleCollider capsule;
@@ -60,6 +63,10 @@ public class FPController : MonoBehaviour
     {
         health = (int) Mathf.Clamp(health - amount, 0, maxHealth);
         healthSlider.value = health;
+        GameObject bloodSplatter = Instantiate(uiBloodPrefab);
+        bloodSplatter.transform.SetParent(canvas.transform);
+        bloodSplatter.transform.position = new Vector3(Random.Range(0, cWidth), Random.Range(0, cHeight), 0);
+        Destroy(bloodSplatter, 2.2f);
         if (health<=0)
         {
             Vector3 pos = new Vector3(
@@ -99,6 +106,9 @@ public class FPController : MonoBehaviour
         healthSlider.value = health;
         ammoReserves.text = ammo.ToString();
         AmmoClipText.text = ammoClip.ToString();
+
+        cWidth = canvas.GetComponent<RectTransform>().rect.width;
+        cHeight = canvas.GetComponent<RectTransform>().rect.height;
     }
 
     void ProcessZombieHit()
