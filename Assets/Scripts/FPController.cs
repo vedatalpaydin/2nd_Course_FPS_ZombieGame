@@ -197,6 +197,7 @@ public class FPController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        UpdateCursorLock();
         if (Input.GetKeyDown(KeyCode.F))
             anim.SetBool("arm", !anim.GetBool("arm"));
 
