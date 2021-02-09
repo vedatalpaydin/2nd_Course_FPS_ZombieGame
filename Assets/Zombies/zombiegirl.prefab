@@ -2190,6 +2190,7 @@ GameObject:
   - component: {fileID: 9164389897254779414}
   - component: {fileID: 417450778689006768}
   - component: {fileID: 280389362}
+  - component: {fileID: 9108984763105140320}
   m_Layer: 8
   m_Name: zombiegirl
   m_TagString: Zombie
@@ -2906,10 +2907,10 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: cf55a93a7c8ed4960bbb6af3c2c0b8dd, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: -1
-  Loop: 1
+  Loop: 0
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -2991,6 +2992,23 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &9108984763105140320
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8649283112028866171}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e49f25476f2ac45a89d647c4341ec85b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sound: {fileID: 280389362}
+  sound3D: 1
+  firstPlay: 4
+  randomMin: 5
+  randomMax: 20
 --- !u!1 &8889811393416137658
 GameObject:
   m_ObjectHideFlags: 0

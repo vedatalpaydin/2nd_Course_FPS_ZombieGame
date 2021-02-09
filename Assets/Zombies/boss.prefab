@@ -337,6 +337,7 @@ GameObject:
   - component: {fileID: 9185254381762205402}
   - component: {fileID: 7232903975160465045}
   - component: {fileID: 987628039}
+  - component: {fileID: 4333140734780303186}
   m_Layer: 8
   m_Name: boss
   m_TagString: Zombie
@@ -1051,10 +1052,10 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 89d2b62e258144f248db02e640c2db15, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
-  Loop: 1
+  Loop: 0
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -1136,6 +1137,23 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &4333140734780303186
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1099347172983380646}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e49f25476f2ac45a89d647c4341ec85b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sound: {fileID: 987628039}
+  sound3D: 1
+  firstPlay: 2
+  randomMin: 5
+  randomMax: 20
 --- !u!1 &1571866649296816644
 GameObject:
   m_ObjectHideFlags: 0
