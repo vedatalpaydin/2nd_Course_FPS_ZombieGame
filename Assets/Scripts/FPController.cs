@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
@@ -30,7 +31,7 @@ public class FPController : MonoBehaviour
     public AudioSource triggerSound;
     public AudioSource deathSound;
     public AudioSource reloadSound;
-
+    
     float speed = 0.1f;
     float Xsensitivity = 2;
     float Ysensitivity = 2;
@@ -97,6 +98,7 @@ public class FPController : MonoBehaviour
             GameObject gameOverText = Instantiate(gameOverPrefab);
             gameOverText.transform.SetParent(canvas.transform);
             gameOverText.transform.localPosition = Vector3.zero;
+            
         }
     }
 
