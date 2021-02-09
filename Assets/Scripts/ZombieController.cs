@@ -20,6 +20,8 @@ public class ZombieController : MonoBehaviour
     private string running = "IsRunning";
     private string dead = "IsDead";
     
+    public int shotRequired = 1;
+    public int shotTaken;
     public float walkingSpeed;
     public float runningSpeed;
     public float damageAmount=5;

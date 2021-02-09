@@ -401,6 +401,8 @@ MonoBehaviour:
   - {fileID: 3537633645125046163}
   - {fileID: 2884939338394130061}
   - {fileID: 9185254381762205402}
+  shotRequired: 5
+  shotTaken: 0
   walkingSpeed: 0.3
   runningSpeed: 1
   damageAmount: 5
