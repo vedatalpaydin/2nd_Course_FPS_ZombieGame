@@ -205,6 +205,12 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1031268890200882275, guid: 241039a53e65c4c33b507eb02135356d,
         type: 3}
+    - target: {fileID: 676386070099139871, guid: d44249213784a4fbc953f4da089864dc,
+        type: 3}
+      propertyPath: gameOverPrefab
+      value: 
+      objectReference: {fileID: 2011380788647584324, guid: a1c320dd0c4284b798e10ab34b2d2f8d,
+        type: 3}
     - target: {fileID: 676386070099139938, guid: d44249213784a4fbc953f4da089864dc,
         type: 3}
       propertyPath: m_CastShadows
