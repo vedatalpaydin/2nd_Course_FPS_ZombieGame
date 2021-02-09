@@ -44,6 +44,8 @@ public class FPController : MonoBehaviour
     CapsuleCollider capsule;
     Quaternion cameraRot;
     Quaternion characterRot;
+    private GameObject steve;
+    private Vector3 startPosition;
 
     bool cursorIsLocked = true;
     bool lockCursor = true;
@@ -58,12 +60,15 @@ public class FPController : MonoBehaviour
     int maxHealth = 100;
     int ammoClip = 10;
     int ammoClipMax = 10;
+    private int lives = 3;
+    private int timesDead;
 
     bool playingWalking = false;
     bool previouslyGrounded = true;
 
     public void TakeDamage(float amount)
     {
+        if(GameStats.gameOver) return;
         health = (int) Mathf.Clamp(health - amount, 0, maxHealth);
         healthSlider.value = health;
         GameObject bloodSplatter = Instantiate(uiBloodPrefab);
@@ -76,11 +81,32 @@ public class FPController : MonoBehaviour
                 transform.position.x, 
                 Terrain.activeTerrain.SampleHeight(transform.position),
                 transform.position.z);
-            GameObject steve = Instantiate(stevePrefab, pos, transform.rotation);
+            steve = Instantiate(stevePrefab, pos, transform.rotation);
             steve.GetComponent<Animator>().SetTrigger("Death");
             GameStats.gameOver = true;
-            Destroy(gameObject);
+            steve.GetComponent<AudioSource>().enabled = false;
+            timesDead++;
+            if (timesDead == lives)
+            {
+                Destroy(gameObject);
+            }
+            else
+            {
+                steve.GetComponent<SteveModelScript>().enabled = false;
+                cam.SetActive(false);
+                Invoke("Respawn" ,5);
+            }
         }
+    }
+
+    void Respawn()
+    {
+        Destroy(steve);
+        cam.SetActive(true);
+        GameStats.gameOver = false;
+        health = maxHealth;
+        healthSlider.value = health;
+        transform.position = startPosition;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -98,7 +124,11 @@ public class FPController : MonoBehaviour
             GameObject gameOverText = Instantiate(gameOverPrefab);
             gameOverText.transform.SetParent(canvas.transform);
             gameOverText.transform.localPosition = Vector3.zero;
-            
+        }
+
+        if (other.tag=="SpawnPoint")
+        {
+            startPosition = transform.position;
         }
     }
 
@@ -116,6 +146,7 @@ public class FPController : MonoBehaviour
 
         cWidth = canvas.GetComponent<RectTransform>().rect.width;
         cHeight = canvas.GetComponent<RectTransform>().rect.height;
+        startPosition = transform.position;
     }
 
     void ProcessZombieHit()

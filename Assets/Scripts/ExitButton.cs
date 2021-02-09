@@ -16,6 +16,9 @@ public class ExitButton : MonoBehaviour
         if(gController == null) return;
         AudioSource music = gController.GetComponent<AudioSource>();
         musicSlider.value = music.volume;
+
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
     }
 
     public void ExitScene()
