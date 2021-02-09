@@ -15,6 +15,8 @@ public class FPController : MonoBehaviour
     public GameObject uiBloodPrefab;
     public GameObject canvas;
     public GameObject gameOverPrefab;
+    public GameObject[] checkpoints;
+    public CompassController compassController;
     
     public Transform shotDirection;
     public Slider healthSlider;
@@ -22,6 +24,8 @@ public class FPController : MonoBehaviour
     public Text AmmoClipText;
     
     public Animator anim;
+
+    public LayerMask checkpointLayer;
 
     public AudioSource[] footsteps;
     public AudioSource jump;
@@ -62,6 +66,7 @@ public class FPController : MonoBehaviour
     int ammoClipMax = 10;
     private int lives = 3;
     private int timesDead;
+    private int currentCheckpoint = 0;
 
     bool playingWalking = false;
     bool previouslyGrounded = true;
@@ -131,6 +136,11 @@ public class FPController : MonoBehaviour
         if (other.tag=="SpawnPoint")
         {
             startPosition = transform.position;
+            if (other.gameObject == checkpoints[currentCheckpoint])
+            {
+                currentCheckpoint++;
+                compassController.target = checkpoints[currentCheckpoint];
+            }
         }
     }
 
@@ -149,12 +159,13 @@ public class FPController : MonoBehaviour
         cWidth = canvas.GetComponent<RectTransform>().rect.width;
         cHeight = canvas.GetComponent<RectTransform>().rect.height;
         startPosition = transform.position;
+        compassController.target = checkpoints[0];
     }
 
     void ProcessZombieHit()
     {
         RaycastHit hitInfo;
-        if (Physics.Raycast(shotDirection.position, shotDirection.forward, out hitInfo, 200))
+        if (Physics.Raycast(shotDirection.position, shotDirection.forward, out hitInfo, 200,~checkpointLayer))
         {
             GameObject hitZombie = hitInfo.collider.gameObject;
             if (hitZombie.tag=="Zombie")
